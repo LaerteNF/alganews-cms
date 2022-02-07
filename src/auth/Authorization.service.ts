@@ -95,7 +95,7 @@ export default class AuthService {
 
     console.log(codeChallenge);
 
-    return `http://localhost:8081/oauth/authorize?${config}`;
+    return `${AUTH_SERVER}/oauth/authorize?${config}`;
   }
 
   public static async imperativelySendToLoginScreen() {
