@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import parseISO from "date-fns/parseISO";
 import { ptBR } from "date-fns/locale";
 import { useCallback } from "react";
 import Skeleton from "react-loading-skeleton";
@@ -33,7 +34,7 @@ function SessionController(props: SessionControllerProps) {
       <SC.Description>
         Editor(a) desde{" "}
         <strong>
-          {format(new Date(user.createdAt), "MMMM 'de' yyyy", { locale: ptBR })}
+          {format(parseISO(user.createdAt), "MMMM 'de' yyyy", { locale: ptBR })}
         </strong>
       </SC.Description>
       <Button variant="danger" label="Logout" onClick={logout} />

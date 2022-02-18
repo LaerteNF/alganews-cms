@@ -1,49 +1,49 @@
 import { ChartProps } from "../../app/components/Chart/Chart";
-import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { format } from "date-fns";
+import parseISO from "date-fns/parseISO";
+import { ptBR } from "date-fns/locale";
 import { Metric } from "laerte_fernandes-sdk";
 
-function transformEditorMonthlyEarningsIntoChartJS ( editorEarnings: Metric.EditorMonthlyEarnings ): ChartProps['data']{
+function transformEditorMonthlyEarningsIntoChartJS(
+  editorEarnings: Metric.EditorMonthlyEarnings
+): ChartProps["data"] {
+  const labels: string[] = [];
+  const data1: number[] = [];
+  const data2: number[] = [];
 
-  const labels: string[] = []
-  const data1: number[] = []
-  const data2: number[] = []  
+  editorEarnings.forEach((earning) => {
+    const formattedMonth = format(parseISO(earning.yearMonth), "MMMM", {
+      locale: ptBR,
+    });
 
-  editorEarnings.forEach(earning => {
-
-    const formattedMonth = format(new Date(earning.yearMonth), 'MMMM', {
-      locale: ptBR
-    })
-
-    labels.push(formattedMonth)
-    data1.push(earning.totalAmount)
-    data2.push(earning.totalPlatformAverageAmount)
-  })
+    labels.push(formattedMonth);
+    data1.push(earning.totalAmount);
+    data2.push(earning.totalPlatformAverageAmount);
+  });
 
   return {
     labels,
-    datasets : [
+    datasets: [
       {
-        label: 'Performance pessoal',
+        label: "Performance pessoal",
         data: data1,
         fill: true,
-        backgroundColor: '#0099FF',
-        borderColor: '#0099FF',
+        backgroundColor: "#0099FF",
+        borderColor: "#0099FF",
         borderWidth: 0.5,
-        yAxisID: 'cashflow',
+        yAxisID: "cashflow",
       },
       {
-        label: 'Performance média do time',
+        label: "Performance média do time",
         data: data2,
         fill: true,
-        backgroundColor: '#274060',
-        borderColor: '#274060',
+        backgroundColor: "#274060",
+        borderColor: "#274060",
         borderWidth: 0.5,
-        yAxisID: 'cashflow',        
-      }
-    ]
-  }
-
+        yAxisID: "cashflow",
+      },
+    ],
+  };
 }
 
-export default transformEditorMonthlyEarningsIntoChartJS
+export default transformEditorMonthlyEarningsIntoChartJS;

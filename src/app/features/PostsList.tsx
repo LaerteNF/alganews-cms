@@ -1,6 +1,7 @@
 import { mdiOpenInNew } from "@mdi/js";
 import Icon from "@mdi/react";
 import { format } from "date-fns";
+import parseISO from "date-fns/parseISO";
 import { Post } from "laerte_fernandes-sdk";
 import { useCallback, useState } from "react";
 import { useEffect } from "react";
@@ -118,7 +119,7 @@ export default function PostList() {
               fontFamily: '"Roboto mono", monospace',
             }}
           >
-            {format(new Date(props.value), "dd/MM/yyyy")}
+            {format(parseISO(props.value), "dd/MM/yyyy")}
           </div>
         ),
       },
@@ -135,7 +136,7 @@ export default function PostList() {
               fontFamily: '"Roboto mono", monospace',
             }}
           >
-            <span>{format(new Date(props.value), "dd/MM/yyyy")} </span>
+            <span>{format(parseISO(props.value), "dd/MM/yyyy")} </span>
           </div>
         ),
       },

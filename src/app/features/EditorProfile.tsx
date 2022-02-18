@@ -1,3 +1,5 @@
+import format from "date-fns/format";
+import parseISO from "date-fns/parseISO";
 import { getEditorDescription, User } from "laerte_fernandes-sdk";
 import { userInfo } from "os";
 import { transparentize } from "polished";
@@ -93,7 +95,10 @@ function EditorProfile(props: EditorProfileProps) {
           {(editorData as User.Detailed)?.birthdate && (
             <FieldDescriptor
               field={"Nascimento"}
-              value={(editorData as User.Detailed)?.birthdate}
+              value={format(
+                parseISO((editorData as User.Detailed)?.birthdate),
+                "dd/MM/yyyy"
+              )}
             />
           )}
         </ContactInfo>
